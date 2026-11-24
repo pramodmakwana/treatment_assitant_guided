@@ -1,0 +1,16 @@
+services:
+  vectordb:
+    image: pgvector/pgvector:pg16
+    container_name: tga-vectordb
+    environment:
+      POSTGRES_USER: tga
+      POSTGRES_PASSWORD: tga_local_pw
+      POSTGRES_DB: guidelines
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - vectordb_data:/var/lib/postgresql/data
+
+volumes:
+  vectordb_data:
